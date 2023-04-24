@@ -51,7 +51,7 @@ class pend_experiment(object):
         # initialize comparison xf bias too far to initiate while loop
         x_f_check = xf + 1 
         # initialize damping coefficient to zero
-        b         = 0
+        b = 0
         # increase b, calculate expected final x distance given experimental time
         # iterate until x_f_check matches or exceeds experimental distance
         while x_f_check >= xf:

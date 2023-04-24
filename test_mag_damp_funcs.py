@@ -1,5 +1,5 @@
 import unittest
-import pend_funcs as pf
+import mag_damp_funcs as pf
 
 
 
