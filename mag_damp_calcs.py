@@ -47,6 +47,7 @@ exp_4_xdot_ss = 5/(32/120) * 25.4/1000
 pend_exps       = [None] * num_experiments
 friction_coeffs = [None] * num_experiments
 damping_coeffs  = [None] * num_experiments
+damp_iter       = [None] * num_experiments
 
 for idx in range(num_experiments):
     pend_exps[idx] = pf.pend_experiment()
@@ -59,13 +60,22 @@ for idx in range(num_experiments):
     pend_exps[idx].t_final_damp_s_vec    = damp_values[idx]
 
     friction_coeffs[idx] = pend_exps[idx].calculate_friction_coefficient()
-    damping_coeffs[idx]  = pend_exps[idx].calculate_damping_coefficient()
+    damping_coeffs[idx], damp_iter[idx]  = pend_exps[idx].calculate_damping_coefficient()
 
+print('friction coefficients:  ')
+for i in friction_coeffs:
+    print(i)
 
-print('friction coefficients:  ', friction_coeffs)
+print('damping coefficients:  ') 
+for i in damping_coeffs:
+    print(i)
 
-print('damping coefficients:  ', damping_coeffs)
+print('number of NR iterations damping  ')
+for i in damp_iter:
+    print(i)
 
 print('exp_3_damp_coeff_from_ss', pend_exps[2].calc_steady_state_damping_coefficient(exp_3_xdot_ss))
 print('exp_4_damp_coeff_from_ss', pend_exps[3].calc_steady_state_damping_coefficient(exp_4_xdot_ss))
 print('exp_4_override_mu', pend_exps[3].calculate_damping_coefficient(mu_k = 0.23))
+
+pend_exps[3].graph_x_final_vs_damping_coefficient(mu_k = 0.2)
